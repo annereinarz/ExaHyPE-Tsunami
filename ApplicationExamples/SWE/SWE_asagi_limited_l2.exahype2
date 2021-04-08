@@ -63,7 +63,7 @@
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
 		  "optimised_kernel_debugging": [],
-		  "implementation": "generic",
+		  "implementation": "optimised",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
