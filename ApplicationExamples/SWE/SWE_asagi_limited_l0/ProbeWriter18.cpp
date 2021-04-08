@@ -7,8 +7,6 @@
 // ========================
 #include "ProbeWriter18.h"
 
-#include "../../../ExaHyPE/exahype/muq_globals.h"
-
 std::vector<double> solution18 = {-1234,-1234};
 bool isWritten = false;
 
@@ -45,7 +43,7 @@ void SWE::ProbeWriter18::mapQuantities(
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
   if(timeStamp>2500.0 && timeStamp<10000 && isWritten==false){
-	  std::ofstream outputsfile(muq::outputs);
+	  std::ofstream outputsfile("/tmp/outputs.txt");
 	  typedef std::numeric_limits<double> dl;
 	  outputsfile << std::fixed << std::setprecision(dl::digits10);
 	  outputsfile << solution18[0] << std::endl;

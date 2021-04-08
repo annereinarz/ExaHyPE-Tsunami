@@ -12,7 +12,6 @@
 #include "peano/utils/Loop.h"
 #include "kernels/KernelUtils.h"
 #include "../../../ExaHyPE/kernels/GaussLegendreBasis.h"
-#include "../../../ExaHyPE/exahype/muq_globals.h"
 #include "InitialData.h"
 #include "stdlib.h"
 
@@ -28,7 +27,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile(muq::inputs);
+	std::ifstream inputsfile("/tmp/inputs.txt.txt");
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
@@ -43,7 +42,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
 	if(paramOutside){
-		std::ofstream outputsfile(muq::outputs);
+		std::ofstream outputsfile("/tmp/outputs.txt");
 		typedef std::numeric_limits<double> dl;
 		outputsfile << std::fixed << std::setprecision(dl::digits10);
 		for(int i = 0; i<4; i++) outputsfile << 1234.0 << std::endl;

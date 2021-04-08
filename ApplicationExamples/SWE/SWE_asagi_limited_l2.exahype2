@@ -20,10 +20,10 @@
     ]
   },
   "shared_memory": {
-    "cores": 48,
+    "cores": 20,
     "properties_file": "sharedmemory.properties",
     "autotuning_strategy": "dummy",
-    "background_job_consumers": 47
+    "background_job_consumers": 11
   },
   "distributed_memory": {
     "timeout": 10000,
@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 70,
+	  "maximum_mesh_size": 22,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {

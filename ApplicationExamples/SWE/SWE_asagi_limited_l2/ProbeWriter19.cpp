@@ -35,23 +35,15 @@ void SWE::ProbeWriter19::mapQuantities(
     double* const outputQuantities,
     double timeStamp
 ) {
-  const int writtenUnknowns = 5;
-  for (int i=0; i<writtenUnknowns-1; i++){ 
-    outputQuantities[i] = Q[i];
-  }
-  outputQuantities[4] = 0.0;
-  if(Q[3] < 0.0)
-      outputQuantities[4] = Q[3]+Q[0];
-
   //std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
   //						     { 1050.67821,   798.352124}};
   // TODO write out into file
-  if(outputQuantities[4] > solution19[1]){
+  if(Q[0]+Q[3] > solution19[1]){
 	  solution19[0] = timeStamp; 
-	  solution19[1] = outputQuantities[4];
+	  solution19[1] = Q[0]+Q[3];
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
-  if(timeStamp>5550.0 && isWritten19==false){
+  if(timeStamp>5550.0 && timeStamp<10000 && isWritten19==false){
 	  std::ofstream outputsfile("/tmp/outputs.txt", std::ios_base::app);
 	  outputsfile << solution19[0] << std::endl;
 	  outputsfile << solution19[1] << std::endl;

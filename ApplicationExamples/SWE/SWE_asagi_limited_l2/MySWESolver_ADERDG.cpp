@@ -27,7 +27,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile("/tmp/inputs.txt");
+	std::ifstream inputsfile("/tmp/inputs.txt.txt");
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
@@ -36,8 +36,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
 		paramOutside = true;
 	}
-
-        DG::initialData = new InitialData(14,"data_gmt.yaml");
+        DG::initialData = new InitialData(15,"data_gmt.yaml");
 }
 
 
@@ -127,8 +126,9 @@ exahype::solvers::Solver::RefinementControl SWE::MySWESolver_ADERDG::refinementC
 
 
 void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,double* const lambda) {
-  if(paramOutside)
+  if(paramOutside){
 	  lambda[0] = 1.0e-4;
+  }
   else{
   /// Dimensions                        = 2
   // Number of variables + parameters  = 4 + 0
@@ -148,7 +148,7 @@ void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,doub
       eigs.hv() = u_n;
       eigs.b() = 0.0;
   }
-}
+  }
 }
 
 void SWE::MySWESolver_ADERDG::flux(const double* const Q,double** const F) {
@@ -216,27 +216,6 @@ bool SWE::MySWESolver_ADERDG::isPhysicallyAdmissible(
       const double t) const {
 	if(paramOutside)
 		return true;
-
-	double bMin, bMax, hMin;
-	idx3 id(Order+1,Order+1,NumberOfVariables);
-	bMin = std::abs(solution[id(0,0,3)]);
-	bMax = std::abs(solution[id(0,0,3)]);
-	hMin=         solution[id(0,0,0)];
-
-	for(int i = 0 ; i < Order+1 ; i++){
-		for(int j = 0 ; j < Order+1 ; j++){
-			bMin=std::min(bMin, std::abs(solution[id(i,j,3)]));
-			bMax=std::max(bMax, std::abs(solution[id(i,j,3)]));
-			hMin=std::min(hMin, solution[id(i,j,0)]);
-		}
-	}
-
-	//Limit if wetting/drying or large slope in bathymetry
-	if(std::abs(bMax - bMin) > dx[0]*2)
-		return false;
-
-	if(hMin < DG::epsilon * 100.0)
-		return false;
 
 	// Limit at domain boundary
 	if( std::abs(center[0]+499)<dx[0]
