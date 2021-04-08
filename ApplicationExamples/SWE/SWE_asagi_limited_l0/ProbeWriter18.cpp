@@ -7,6 +7,8 @@
 // ========================
 #include "ProbeWriter18.h"
 
+#include "../../../ExaHyPE/exahype/muq_globals.h"
+
 std::vector<double> solution18 = {-1234,-1234};
 bool isWritten = false;
 
@@ -35,23 +37,15 @@ void SWE::ProbeWriter18::mapQuantities(
     double* const outputQuantities,
     double timeStamp
 ) {
-  const int writtenUnknowns = 5;
-  for (int i=0; i<writtenUnknowns-1; i++){ 
-    outputQuantities[i] = Q[i];
-  }
-  outputQuantities[4] = 0.0;
-  if(Q[3] < 0.0)
-      outputQuantities[4] = Q[3]+Q[0];
-
   //std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
   //TODO write out into file						     { 1050.67821,   798.352124}};
-  if(outputQuantities[4] > solution18[1]){
+  if(Q[3]+Q[0] > solution18[1]){
 	  solution18[0] = timeStamp; 
-	  solution18[1] = outputQuantities[4];
+	  solution18[1] = Q[3]+Q[0];
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
-  if(timeStamp>2500.0 && isWritten==false){
-	  std::ofstream outputsfile("/tmp/outputs.txt");
+  if(timeStamp>2500.0 && timeStamp<10000 && isWritten==false){
+	  std::ofstream outputsfile(muq::outputs);
 	  typedef std::numeric_limits<double> dl;
 	  outputsfile << std::fixed << std::setprecision(dl::digits10);
 	  outputsfile << solution18[0] << std::endl;

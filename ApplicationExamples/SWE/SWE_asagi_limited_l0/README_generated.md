@@ -9,9 +9,3 @@ Solvers used
 MySWESolver
 -----------
 
-### Prerequisite
-
-flux
-
-ncp
-

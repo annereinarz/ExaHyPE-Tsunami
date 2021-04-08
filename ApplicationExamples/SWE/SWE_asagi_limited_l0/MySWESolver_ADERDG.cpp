@@ -6,28 +6,29 @@
 //   www.exahype.eu
 // ========================
 
-#include "MySWESolver.h"
-#include "MySWESolver_Variables.h"
+#include "MySWESolver_ADERDG.h"
+#include "MySWESolver_ADERDG_Variables.h"
 
 #include "peano/utils/Loop.h"
 #include "kernels/KernelUtils.h"
 #include "../../../ExaHyPE/kernels/GaussLegendreBasis.h"
+#include "../../../ExaHyPE/exahype/muq_globals.h"
 #include "InitialData.h"
 #include "stdlib.h"
 
 using namespace kernels;
 
-tarch::logging::Log SWE::MySWESolver::_log( "SWE::MySWESolver" );
+tarch::logging::Log SWE::MySWESolver_ADERDG::_log( "SWE::MySWESolver_ADERDG" );
 
 bool paramOutside = false;
 namespace DG{
 	double grav = 9.81*1.0e-3;
-	double epsilon = 1.0e-2;
+	double epsilon = 1e-2;
 	InitialData* initialData;
 }
 
-void SWE::MySWESolver::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile("/tmp/inputs.txt");
+void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
+	std::ifstream inputsfile(muq::inputs);
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
@@ -36,60 +37,60 @@ void SWE::MySWESolver::init(const std::vector<std::string>& cmdlineargs,const ex
 	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
 		paramOutside = true;
 	}
-
-	DG::initialData = new InitialData(15,"data_gmt.yaml");
+        DG::initialData = new InitialData(15,"data_gmt.yaml");
 }
 
 
-void SWE::MySWESolver::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
+void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
 	if(paramOutside){
-	    std::ofstream outputsfile("/tmp/outputs.txt");
-	    typedef std::numeric_limits<double> dl;
-	    outputsfile << std::fixed << std::setprecision(dl::digits10);
-	    for(int i = 0; i<4; i++) outputsfile << 1234.0 << std::endl;
-	    outputsfile.close();
-	    for(int i = 0; i<4; i++) Q[i] = 0.0;
+		std::ofstream outputsfile(muq::outputs);
+		typedef std::numeric_limits<double> dl;
+		outputsfile << std::fixed << std::setprecision(dl::digits10);
+		for(int i = 0; i<4; i++) outputsfile << 1234.0 << std::endl;
+		outputsfile.close();
+		for(int i = 0; i<4; i++) Q[i] = 0.0;
 	}
 	else{
-  // Dimensions                        = 2
-  // Number of variables + parameters  = 4 + 0
-    if (tarch::la::equals(t,0.0)) {
-	static tarch::multicore::BooleanSemaphore initializationSemaphoreDG;
-	tarch::multicore::Lock lock(initializationSemaphoreDG);
-	DG::initialData->getInitialData(x, Q);		
-        lock.free();
-    }
-    //probe 1
-    /*std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
-  						     { 1050.67821,   798.352124}};
-    if(std::abs(x[0]-probe_point[0][0])<60.0 && std::abs(x[1]-probe_point[0][1])<60.0){
-      if(Q[0]+Q[3] > DG::solution[1+2*0]){
-	  DG::solution[0+2*0] = t; 
-	  DG::solution[1+2*0] = Q[0]+Q[3];
-      }
-    }
-    //probe 2
-    if(std::abs(x[0]-probe_point[1][0])<60.0 && std::abs(x[1]-probe_point[1][1])<60.0){
-      if(Q[0]+Q[3] > DG::solution[1+2*1]){
-	  DG::solution[0+2*1] = t; 
-	  DG::solution[1+2*1] = Q[0]+Q[3];
-      }
-    }
-    if(t>5500.0 && isWritten==false){
-	    std::ofstream outputsfile("/tmp/outputs.txt");
-	    typedef std::numeric_limits<double> dl;
-	    outputsfile << std::fixed << std::setprecision(dl::digits10);
-	    outputsfile << DG::solution[0] << std::endl;
-	    outputsfile << DG::solution[1] << std::endl;
-	    outputsfile << DG::solution[2] << std::endl;
-	    outputsfile << DG::solution[3] << std::endl;
-	    outputsfile.close();	
-	    isWritten = true;
-    }*/
+
+		// Dimensions                        = 2
+		// Number of variables + parameters  = 4 + 0
+		if (tarch::la::equals(t,0.0)) {
+			static tarch::multicore::BooleanSemaphore initializationSemaphoreDG;
+			tarch::multicore::Lock lock(initializationSemaphoreDG);
+			DG::initialData->getInitialData(x, Q);		
+			lock.free();
+		}
+		/*//probe 1
+		std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
+			{ 1050.67821,   798.352124}};
+		if(std::abs(x[0]-probe_point[0][0])<60.0 && std::abs(x[1]-probe_point[0][1])<60.0){
+			if(Q[0]+Q[3] > DG::solution[1+2*0]){
+				DG::solution[0+2*0] = t; 
+				DG::solution[1+2*0] = Q[0]+Q[3];
+			}
+		}
+		//probe 2
+		if(std::abs(x[0]-probe_point[1][0])<60.0 && std::abs(x[1]-probe_point[1][1])<60.0){
+			if(Q[0]+Q[3] > DG::solution[1+2*1]){
+				DG::solution[0+2*1] = t; 
+				DG::solution[1+2*1] = Q[0]+Q[3];
+			}
+		}
+		if(t>5500.0 && isWritten==false){
+			std::ofstream outputsfile("/tmp/outputs.txt");
+			typedef std::numeric_limits<double> dl;
+			outputsfile << std::fixed << std::setprecision(dl::digits10);
+			outputsfile << DG::solution[0] << std::endl;
+			outputsfile << DG::solution[1] << std::endl;
+			outputsfile << DG::solution[2] << std::endl;
+			outputsfile << DG::solution[3] << std::endl;
+			outputsfile.close();	
+			isWritten = true;
+		}*/
 	}
 }
 
-void SWE::MySWESolver::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {
+void SWE::MySWESolver_ADERDG::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {
   // Dimensions                        = 2
   // Number of variables + parameters  = 4 + 0
   //Wall
@@ -101,8 +102,21 @@ void SWE::MySWESolver::boundaryValues(const double* const x,const double t,const
   std::copy_n(F[normalNonZero], NumberOfVariables, fluxOut);
 }
 
-exahype::solvers::Solver::RefinementControl SWE::MySWESolver::refinementCriterion(const double* const luh,const tarch::la::Vector<DIMENSIONS,double>& center,const tarch::la::Vector<DIMENSIONS,double>& dx,double t,const int lev) {
-	return exahype::solvers::Solver::RefinementControl::Keep;
+exahype::solvers::Solver::RefinementControl SWE::MySWESolver_ADERDG::refinementCriterion(const double* const luh,const tarch::la::Vector<DIMENSIONS,double>& center,const tarch::la::Vector<DIMENSIONS,double>& dx,double t,const int lev) {
+
+    double largestH = -std::numeric_limits<double>::max();
+    double smallestH = std::numeric_limits<double>::max();
+
+    kernels::idx3 idx_luh(Order+1,Order+1,NumberOfVariables);
+    dfor(i,Order+1) {
+        ReadOnlyVariables vars(luh + idx_luh(i(1),i(0),0));
+        largestH = std::max (largestH, vars.h()+vars.b());
+        smallestH = std::min(smallestH, vars.h()+vars.b());
+    }
+	
+    if(std::abs(largestH - smallestH) > 1e-7)
+	    return exahype::solvers::Solver::RefinementControl::Refine;
+    return exahype::solvers::Solver::RefinementControl::Erase;
 }
 
 //*****************************************************************************
@@ -112,9 +126,10 @@ exahype::solvers::Solver::RefinementControl SWE::MySWESolver::refinementCriterio
 //*****************************************************************************
 
 
-void SWE::MySWESolver::eigenvalues(const double* const Q,const int d,double* const lambda) {
-  if(paramOutside)
+void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,double* const lambda) {
+  if(paramOutside){
 	  lambda[0] = 1.0e-4;
+  }
   else{
   /// Dimensions                        = 2
   // Number of variables + parameters  = 4 + 0
@@ -125,14 +140,19 @@ void SWE::MySWESolver::eigenvalues(const double* const Q,const int d,double* con
   const double ih = 1./vars.h();
   double u_n = Q[d + 1] * ih;
 
-  eigs.h() = u_n + c;
-  eigs.hu() = u_n - c;
-  eigs.hv() = u_n;
-  eigs.b() = 0.0;
-}
+  if(Q[0]<DG::epsilon){
+      eigs.h() = DG::epsilon;
+  }
+  else{
+      eigs.h() = u_n + c;
+      eigs.hu() = u_n - c;
+      eigs.hv() = u_n;
+      eigs.b() = 0.0;
+  }
+  }
 }
 
-void SWE::MySWESolver::flux(const double* const Q,double** const F) {
+void SWE::MySWESolver_ADERDG::flux(const double* const Q,double** const F) {
 	// Dimensions                        = 2
 	// Number of variables + parameters  = 4 + 0
 
@@ -143,7 +163,7 @@ void SWE::MySWESolver::flux(const double* const Q,double** const F) {
 	double* f = F[0];
 	double* g = F[1];
 
-	if(paramOutside){
+	if(paramOutside || Q[0]<DG::epsilon){
 		f[0] = 0.0;
 		f[1] = 0.0;
 		f[2] = 0.0;
@@ -171,8 +191,10 @@ void SWE::MySWESolver::flux(const double* const Q,double** const F) {
 	}
 }
 
-void  SWE::MySWESolver::nonConservativeProduct(const double* const Q,const double* const gradQ,double* const BgradQ) {
+
+void  SWE::MySWESolver_ADERDG::nonConservativeProduct(const double* const Q,const double* const gradQ,double* const BgradQ) {
   idx2 idx_gradQ(DIMENSIONS,NumberOfVariables);
+
   BgradQ[0] = 0.0;
 if(paramOutside){
   BgradQ[1] = 0.0;
@@ -185,7 +207,28 @@ else{
   BgradQ[3] = 0.0;
 }
 
-void SWE::MySWESolver::riemannSolver(double* const FL,double* const FR,const double* const QL,const double* const QR,const double* gradQL, const double* gradQR, const double dt,const int direction,bool isBoundaryFace, int faceIndex) {
+
+bool SWE::MySWESolver_ADERDG::isPhysicallyAdmissible(
+      const double* const solution,
+      const double* const observablesMin,const double* const observablesMax,
+      const bool wasTroubledInPreviousTimeStep,
+      const tarch::la::Vector<DIMENSIONS,double>& center,
+      const tarch::la::Vector<DIMENSIONS,double>& dx,
+      const double t) const {
+	if(paramOutside)
+		return true;
+
+	// Limit at domain boundary
+	if( std::abs(center[0]+499)<dx[0]
+			|| std::abs(center[0]-1798+499)<dx[0]
+			|| std::abs(center[1]+949)<dx[1]
+			|| std::abs(center[1]-1798+949)<dx[1])
+		return false;
+	return true;
+}
+
+
+void SWE::MySWESolver_ADERDG::riemannSolver(double* const FL,double* const FR,const double* const QL,const double* const QR,const double* gradQL, const double* gradQR, const double dt,const int direction,bool isBoundaryFace, int faceIndex) {
   constexpr int numberOfVariables  = NumberOfVariables;
   constexpr int numberOfData       = numberOfVariables;
   constexpr int order              = Order;

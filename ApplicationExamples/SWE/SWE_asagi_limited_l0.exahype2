@@ -20,10 +20,10 @@
     ]
   },
   "shared_memory": {
-    "cores": 48,
+    "cores": 20,
     "properties_file": "sharedmemory.properties",
     "autotuning_strategy": "dummy",
-    "background_job_consumers": 47
+    "background_job_consumers": 11
   },
   "distributed_memory": {
     "timeout": 10000,
@@ -47,10 +47,10 @@
   },
   "solvers": [
   {
-	  "type": "ADER-DG",
+	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 220,
+	  "maximum_mesh_size": 300,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -67,12 +67,27 @@
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
+	  "limiter": {
+		  "dmp_observables": 0,
+		  "dmp_relaxation_parameter": 10000.0,
+		  "dmp_difference_scaling": 10000.0,
+		  "implementation": "generic"
+	  },
+	  "fv_kernel": {
+		  "language": "C",
+		  "terms": [
+			  "flux"
+			  ],
+		  "scheme": "godunov",
+		  "implementation": "generic",
+		  "allocate_temporary_arrays": "stack"
+	  },
 	  "variables": [
 	  {
 		  "name": "h",
 		  "multiplicity": 1
 	  },
-	  {
+	 { 
 		  "name": "hu",
 		  "multiplicity": 1
 	  },
@@ -92,7 +107,7 @@
 			  "time": 0.0,
 			  "repeat": 10.0,
 			  "output": "./Probes/buoy18",
-			  "variables": 5,
+			  "variables": 0,
 			  "select": {
 				  "x": 545.735266126,
 				  "y": 62.7164740303
@@ -104,20 +119,13 @@
 			  "time": 0.0,
 			  "repeat": 10.0,
 			  "output": "./Probes/buoy19",
-			  "variables": 5,
+			  "variables": 0,
 			  "select": {
 				  "x": 1050.67821,
 				  "y": 798.352124
 			  }
-		  },
-		  {
-			  "type": "vtu::Cartesian::cells::ascii",
-			  "name": "ConservedWriter",
-			  "time": 0.0,
-			  "repeat": 20000.0,
-			  "output": "./vtk-output/limited",
-			  "variables": 5
 		  }
+		  
 	  ]
   } 
  ]

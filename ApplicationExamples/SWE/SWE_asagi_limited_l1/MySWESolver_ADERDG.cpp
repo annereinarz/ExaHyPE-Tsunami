@@ -127,8 +127,9 @@ exahype::solvers::Solver::RefinementControl SWE::MySWESolver_ADERDG::refinementC
 
 
 void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,double* const lambda) {
-  if(paramOutside)
+  if(paramOutside){
 	  lambda[0] = 1.0e-4;
+  }
   else{
   /// Dimensions                        = 2
   // Number of variables + parameters  = 4 + 0
@@ -148,7 +149,7 @@ void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,doub
       eigs.hv() = u_n;
       eigs.b() = 0.0;
   }
-}
+  }
 }
 
 void SWE::MySWESolver_ADERDG::flux(const double* const Q,double** const F) {
