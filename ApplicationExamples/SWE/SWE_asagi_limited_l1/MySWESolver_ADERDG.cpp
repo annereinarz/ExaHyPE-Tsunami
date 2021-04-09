@@ -12,6 +12,7 @@
 #include "peano/utils/Loop.h"
 #include "kernels/KernelUtils.h"
 #include "../../../ExaHyPE/kernels/GaussLegendreBasis.h"
+#include "../../../ExaHyPE/exahype/muq_globals.h"
 #include "InitialData.h"
 #include "stdlib.h"
 
@@ -27,7 +28,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile("/tmp/inputs.txt");
+	std::ifstream inputsfile(muq::inputs);
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
@@ -43,7 +44,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
 	if(paramOutside){
-		std::ofstream outputsfile("/tmp/outputs.txt");
+		std::ofstream outputsfile(muq::outputs);
 		typedef std::numeric_limits<double> dl;
 		outputsfile << std::fixed << std::setprecision(dl::digits10);
 		for(int i = 0; i<4; i++) outputsfile << 1234.0 << std::endl;
@@ -127,8 +128,9 @@ exahype::solvers::Solver::RefinementControl SWE::MySWESolver_ADERDG::refinementC
 
 
 void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,double* const lambda) {
-  if(paramOutside)
+  if(paramOutside){
 	  lambda[0] = 1.0e-4;
+  }
   else{
   /// Dimensions                        = 2
   // Number of variables + parameters  = 4 + 0
@@ -148,7 +150,7 @@ void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,doub
       eigs.hv() = u_n;
       eigs.b() = 0.0;
   }
-}
+  }
 }
 
 void SWE::MySWESolver_ADERDG::flux(const double* const Q,double** const F) {

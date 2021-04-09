@@ -31,10 +31,14 @@
 #include <iostream>
 #include <cstdio>
 #include "../kernels/GaussLegendreBasis.h"
+#include "muq_globals.h"
 
 #ifndef EXAHYPE_LATE_TAKEOVER
 
 tarch::logging::Log _log("exahype");
+
+std::string muq::inputs;
+std::string muq::outputs;
 
 int exahype::main(int argc, char** argv) {
   //
@@ -43,7 +47,7 @@ int exahype::main(int argc, char** argv) {
   //
   std::string progname = argv[0];
 
-  if (argc < 2) {
+  if (argc < 4 ) {
     logError("main()", "Usage: " << progname << " --help");
     return -1;
   }
@@ -51,6 +55,11 @@ int exahype::main(int argc, char** argv) {
   // cmdlineargs contains all argv expect the progname.
   std::vector<std::string> cmdlineargs(argv + 1, argv + argc);
   std::string firstarg = cmdlineargs[0];
+  muq::inputs = cmdlineargs[1];
+  muq::outputs = cmdlineargs[2];
+
+  std::cout << "inputs file " << muq::inputs << std::endl;
+  std::cout << "outputs file " << muq::outputs << std::endl;
 
   bool showHelp    = firstarg == "-h" || firstarg == "--help";
   bool showVersion = firstarg == "-v" || firstarg == "--version";

@@ -3,6 +3,7 @@
 #include "easi/YAMLParser.h"
 #include "easi/ResultAdapter.h"
 #include "reader/asagi_reader.h"
+#include "../../../ExaHyPE/exahype/muq_globals.h"
 #include <cmath>
 #include <vector>
 #include <iostream>
@@ -21,7 +22,7 @@ InitialData::InitialData()
 	: scenario(){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
+		std::ifstream inputsfile(muq::inputs);
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
@@ -37,7 +38,7 @@ InitialData::InitialData(int a_scenario, char* filename)
 	: scenario(a_scenario){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
+		std::ifstream inputsfile(muq::inputs);
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}

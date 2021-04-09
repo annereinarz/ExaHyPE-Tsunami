@@ -10,8 +10,7 @@ double grav = 9.81*1.0e-3;
 InitialData* initialData;
 
 void SWE::MySWESolver_FV::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-
-        initialData = new InitialData(14,"data_gmt.yaml");
+        initialData = new InitialData(15,"data_gmt.yaml");
 }
 
 
