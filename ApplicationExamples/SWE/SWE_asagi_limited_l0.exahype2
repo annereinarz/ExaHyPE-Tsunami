@@ -115,18 +115,25 @@
 		  },
 		  {
 			  "type": "probe::ascii",
-			  "name": "ProbeWriter19",
-			  "time": 0.0,
-			  "repeat": 10.0,
-			  "output": "./Probes/buoy19",
-			  "variables": 0,
-			  "select": {
-				  "x": 1050.67821,
-				  "y": 798.352124
-			  }
-		  }
-		  
-	  ]
+              "name": "ProbeWriter19",
+              "time": 0.0,
+              "repeat": 10.0,
+              "output": "./Probes/buoy19",
+              "variables": 0,
+              "select": {
+                  "x": 1050.67821,
+                  "y": 798.352124
+              }
+          },
+          {
+              "type": "vtk::Cartesian::vertices::ascii",
+              "name": "Writer",
+              "time": 10000.0,
+              "repeat": 0.01,
+              "output": "./vtk-output",
+              "variables": 4
+          }
+      ]
   } 
- ]
+   ]
 }
