@@ -172,11 +172,16 @@ void kernels::finalise() {
   std::set<int> orders;
   for (const auto p : exahype::solvers::RegisteredSolvers) {
     orders.insert(p->getNodesPerCoordinateAxis()-1);
-  }
+ }
+
+  {% for kernelgenContext in kernelgeneratorContextsList %}
+  {% if loop.first %}
   {{kernelgenContext.namespace}}::freeQuadratureNodesAndWeights();
-{% if kernelgenContext.kernelType == "aderdg" %}
+  {% if kernelgenContext.kernelType == "aderdg" %}
   {{kernelgenContext.namespace}}::freeDGMatrices();
-{% endif %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
 
   for (auto solver : exahype::solvers::RegisteredSolvers) {
     delete solver;
