@@ -173,12 +173,10 @@ void kernels::finalise() {
   for (const auto p : exahype::solvers::RegisteredSolvers) {
     orders.insert(p->getNodesPerCoordinateAxis()-1);
   }
-{% for kernelgenContext in kernelgeneratorContextsList %}
   {{kernelgenContext.namespace}}::freeQuadratureNodesAndWeights();
 {% if kernelgenContext.kernelType == "aderdg" %}
   {{kernelgenContext.namespace}}::freeDGMatrices();
 {% endif %}
-{% endfor %}
 
   for (auto solver : exahype::solvers::RegisteredSolvers) {
     delete solver;
