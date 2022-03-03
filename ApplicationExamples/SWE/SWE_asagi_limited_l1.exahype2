@@ -130,7 +130,7 @@
               "type": "vtk::Cartesian::vertices::ascii",
               "name": "Writer",
               "time": 10000.0,
-              "repeat": 0.01,
+              "repeat": 100.0,
               "output": "/output/vtk-output-l1-",
               "variables": 4
           }
