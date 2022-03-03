@@ -245,10 +245,13 @@ int exahype::main(int argc, char** argv) {
   }
 
   peano::shutdownParallelEnvironment();
+  logInfo("main()", "shut down parallel env " << programExitCode);
   peano::shutdownSharedMemoryEnvironment();
+  logInfo("main()", "shut down shared env " << programExitCode);
   peano::releaseCachedData();
-
+  logInfo("main()", "cached data " << programExitCode);
   kernels::finalise();
+  logInfo("main()", "finalise kernels " << programExitCode);
 
   return programExitCode;
 }
