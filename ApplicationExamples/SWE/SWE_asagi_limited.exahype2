@@ -6,7 +6,7 @@
 	"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited",
 	"log_file": "mylogfile.log"
   },
-  "architecture": "snb",
+  "architecture": "noarch",
   "computational_domain": {
     "dimension": 2,
     "end_time": 5600.0,
