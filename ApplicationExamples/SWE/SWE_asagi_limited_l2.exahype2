@@ -28,7 +28,7 @@
   "distributed_memory": {
     "timeout": 10000,
     "load_balancing_type": "static",
-    "buffer_size": 1600,
+    "buffer_size": 160000,
     "load_balancing_strategy": "hotspot",
     "node_pool_strategy": "fair",
     "ranks_per_node": 1
