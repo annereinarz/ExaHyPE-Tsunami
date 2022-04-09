@@ -107,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/65",
 			  "variables": 0,
 			  "select": {
 				  "x": 545.735266126,
@@ -119,7 +119,7 @@
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy19",
+			  "output": "/Probes/buoy19/65",
 			  "variables": 0,
 			  "select": {
 				  "x": 1050.67821,

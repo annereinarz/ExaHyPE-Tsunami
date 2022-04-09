@@ -106,7 +106,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/90",
 			  "variables": 0,
 			  "select": {
 				  "x": 545.735266126,
@@ -115,16 +115,16 @@
 		  },
 		  {
 			  "type": "probe::ascii",
-              "name": "ProbeWriter19",
-              "time": 0.0,
-              "repeat": 10.0,
-              "output": "./Probes/buoy19",
-              "variables": 0,
-              "select": {
-                  "x": 1050.67821,
-                  "y": 798.352124
-              }
-          },
+			  "name": "ProbeWriter19",
+			  "time": 0.0,
+			  "repeat": 10.0,
+			  "output": "/Probes/buoy19/90",
+			  "variables": 0,
+			  "select": {
+				  "x": 1050.67821,
+				  "y": 798.352124
+			  }
+		  },
           {
               "type": "vtk::Cartesian::vertices::ascii",
               "name": "Writer",
