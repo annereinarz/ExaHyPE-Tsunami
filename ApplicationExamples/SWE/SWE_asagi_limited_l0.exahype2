@@ -28,7 +28,7 @@
   "distributed_memory": {
     "timeout": 10000,
     "load_balancing_type": "static",
-    "buffer_size": 1600,
+    "buffer_size": 160000,
     "load_balancing_strategy": "hotspot",
     "node_pool_strategy": "fair",
     "ranks_per_node": 1
@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 120,
+	  "maximum_mesh_size": 22,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -68,9 +68,9 @@
 	  },
 	  "point_sources": 0,
 	  "limiter": {
-		  "dmp_observables": 0,
-		  "dmp_relaxation_parameter": 10000.0,
-		  "dmp_difference_scaling": 10000.0,
+		  "dmp_observables": 1,
+		  "dmp_relaxation_parameter": 100000000.0,
+		  "dmp_difference_scaling": 100000000.0,
 		  "implementation": "generic"
 	  },
 	  "fv_kernel": {
