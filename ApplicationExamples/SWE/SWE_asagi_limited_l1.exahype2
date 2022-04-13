@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 70,
+	  "maximum_mesh_size": 22,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -69,8 +69,8 @@
 	  "point_sources": 0,
 	  "limiter": {
 		  "dmp_observables": 1,
-		  "dmp_relaxation_parameter": 10000.0,
-		  "dmp_difference_scaling": 10000.0,
+		  "dmp_relaxation_parameter": 100000000.0,
+		  "dmp_difference_scaling": 100000000.0,
 		  "implementation": "generic"
 	  },
 
@@ -107,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/80",
 			  "variables": 4,
 			  "select": {
 				  "x": 545.735266126,
@@ -119,7 +119,7 @@
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy19",
+			  "output": "/Probes/buoy19/80",
 			  "variables": 4,
 			  "select": {
 				  "x": 1050.67821,
@@ -131,7 +131,7 @@
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/vtk-output-l1-",
+              "output": "/output/80/vtk-output-l1-",
               "variables": 4
           }
 	  ]

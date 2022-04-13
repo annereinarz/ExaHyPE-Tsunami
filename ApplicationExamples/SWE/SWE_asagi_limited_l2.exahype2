@@ -28,7 +28,7 @@
   "distributed_memory": {
     "timeout": 10000,
     "load_balancing_type": "static",
-    "buffer_size": 1600,
+    "buffer_size": 160000,
     "load_balancing_strategy": "hotspot",
     "node_pool_strategy": "fair",
     "ranks_per_node": 1
@@ -107,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/65",
 			  "variables": 4,
 			  "select": {
 				  "x": 545.735266126,
@@ -119,7 +119,7 @@
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy19",
+			  "output": "/Probes/buoy19/65",
 			  "variables": 4,
 			  "select": {
 				  "x": 1050.67821,
@@ -131,7 +131,7 @@
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/vtk-output-l2-",
+              "output": "/output/65/vtk-output-l2-",
               "variables": 4
           }
 

@@ -28,7 +28,7 @@
   "distributed_memory": {
     "timeout": 10000,
     "load_balancing_type": "static",
-    "buffer_size": 1600,
+    "buffer_size": 160000,
     "load_balancing_strategy": "hotspot",
     "node_pool_strategy": "fair",
     "ranks_per_node": 1
@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 120,
+	  "maximum_mesh_size": 22,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -68,9 +68,9 @@
 	  },
 	  "point_sources": 0,
 	  "limiter": {
-		  "dmp_observables": 0,
-		  "dmp_relaxation_parameter": 10000.0,
-		  "dmp_difference_scaling": 10000.0,
+		  "dmp_observables": 1,
+		  "dmp_relaxation_parameter": 100000000.0,
+		  "dmp_difference_scaling": 100000000.0,
 		  "implementation": "generic"
 	  },
 	  "fv_kernel": {
@@ -106,7 +106,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/90",
 			  "variables": 4,
 			  "select": {
 				  "x": 545.735266126,
@@ -114,23 +114,22 @@
 			  }
 		  },
 		  {
-			  "type": "probe::ascii",
-              "name": "ProbeWriter19",
-              "time": 0.0,
-              "repeat": 10.0,
-              "output": "./Probes/buoy19",
-              "variables": 4,
-              "select": {
-                  "x": 1050.67821,
-                  "y": 798.352124
-              }
-          },
+			  "name": "ProbeWriter19",
+			  "time": 0.0,
+			  "repeat": 10.0,
+			  "output": "/Probes/buoy19/90",
+			  "variables": 4,
+			  "select": {
+				  "x": 1050.67821,
+				  "y": 798.352124
+			  }
+		  },
           {
               "type": "vtk::Cartesian::vertices::ascii",
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/vtk-output-l0-",
+              "output": "/output/90/vtk-output-l0-",
               "variables": 4
           }
       ]
