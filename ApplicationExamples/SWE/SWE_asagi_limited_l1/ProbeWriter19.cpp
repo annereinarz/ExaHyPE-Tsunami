@@ -38,6 +38,9 @@ void SWE::ProbeWriter19::mapQuantities(
   //std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
   //						     { 1050.67821,   798.352124}};
   // TODO write out into file
+  for(int i=0; i < 4; i++){
+    outputQuantities[i] = Q[i];
+  }
   if(Q[0]+Q[3] > solution19[1]){
 	  solution19[0] = timeStamp; 
 	  solution19[1] = Q[0]+Q[3];
