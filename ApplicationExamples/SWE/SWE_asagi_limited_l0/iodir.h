@@ -1,10 +1,10 @@
 #ifndef IODIR_H
+#define IODIR_H
 
 #include <string>
-#include <stdio.h>
+#include <iostream>
 
 std::string get_output();
-
 std::string get_input();
 
 #endif

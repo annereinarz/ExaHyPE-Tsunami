@@ -7,7 +7,7 @@ std::string get_input(){
         std::cout << "Shared directory path not set" <<std::endl;
     }
     std::string input(env_path);
-    return inputsfile(input+"inputs.txt");
+    return input+"inputs.txt";
 }
 
 std::string get_output(){
@@ -17,5 +17,5 @@ std::string get_output(){
         std::cout << "Shared directory path not set" <<std::endl;
     }
     std::string output(env_path);
-	return outputsfile(output+"outputs.txt");
+	return output+"outputs.txt";
 }
