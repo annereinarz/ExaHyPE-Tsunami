@@ -6,6 +6,7 @@
 //   www.exahype.eu
 // ========================
 #include "ProbeWriter19.h"
+#include "iodir.h"
 
 std::vector<double> solution19 = {-1234,-1234};
 bool isWritten19 = false;
@@ -44,9 +45,8 @@ void SWE::ProbeWriter19::mapQuantities(
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
   if(timeStamp>5550.0 && timeStamp<10000 && isWritten19==false){
-      const char* env_path = std::getenv("SHARED_DIR");
-      std::string output(env_path);
-	  std::ofstream outputsfile(output+"utputs.txt");
+      auto outputs = get_output();
+	  std::ofstream outputsfile(outputs);
 	  outputsfile << solution19[0] << std::endl;
 	  outputsfile << solution19[1] << std::endl;
 	  outputsfile.close();	
