@@ -20,8 +20,9 @@ std::vector<double> param = {0.0,0.0};
 InitialData::InitialData()
 	: scenario(){
 		std::cout << "Initialising with ASAGI" << std::endl;
-
-		std::ifstream inputsfile("/shared/inputs.txt");
+        const char* env_path = std::getenv("SHARED_DIR");
+        std::string input(env_path);
+        std::ifstream inputsfile(input+"inputs.txt");
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
@@ -36,8 +37,10 @@ InitialData::InitialData()
 InitialData::InitialData(int a_scenario, char* filename)
 	: scenario(a_scenario){
 		std::cout << "Initialising with ASAGI" << std::endl;
-
-		std::ifstream inputsfile("/shared/inputs.txt");
+  
+        const char* env_path = std::getenv("SHARED_DIR");
+        std::string input(env_path);
+        std::ifstream inputsfile(input+"inputs.txt");
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
