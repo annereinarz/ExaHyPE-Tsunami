@@ -21,7 +21,7 @@ InitialData::InitialData()
 	: scenario(){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
+		std::ifstream inputsfile("/shared/inputs.txt");
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
@@ -37,7 +37,7 @@ InitialData::InitialData(int a_scenario, char* filename)
 	: scenario(a_scenario){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
+		std::ifstream inputsfile("/shared/inputs.txt");
 		for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}

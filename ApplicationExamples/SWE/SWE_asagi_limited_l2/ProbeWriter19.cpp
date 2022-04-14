@@ -44,7 +44,7 @@ void SWE::ProbeWriter19::mapQuantities(
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
   if(timeStamp>5550.0 && timeStamp<10000 && isWritten19==false){
-	  std::ofstream outputsfile("/tmp/outputs.txt", std::ios_base::app);
+	  std::ofstream outputsfile("/shared/outputs.txt", std::ios_base::app);
 	  outputsfile << solution19[0] << std::endl;
 	  outputsfile << solution19[1] << std::endl;
 	  outputsfile.close();	
