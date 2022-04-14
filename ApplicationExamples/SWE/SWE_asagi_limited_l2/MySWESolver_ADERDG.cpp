@@ -13,7 +13,7 @@
 #include "kernels/KernelUtils.h"
 #include "../../../ExaHyPE/kernels/GaussLegendreBasis.h"
 #include "InitialData.h"
-#include "stdlib.h"
+#include "iodir.h"
 
 using namespace kernels;
 
@@ -27,9 +27,8 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-    const char* env_path = std::getenv("SHARED_DIR");
-    std::string input(env_path);
-    std::ifstream inputsfile(input+"inputs.txt");
+    std::string inputs = get_inputs();
+    std::ifstream inputsfile(inputs);
 
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
@@ -45,9 +44,8 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
 	if(paramOutside){
-        const char* env_path = std::getenv("SHARED_DIR");
-        std::string output(env_path);
-        std::ofstream outputsfile(output+"outputs.txt");
+        std::string outputs = get_outputs();
+        std::ofstream outputsfile(outputs);
 	
 		typedef std::numeric_limits<double> dl;
 		outputsfile << std::fixed << std::setprecision(dl::digits10);
