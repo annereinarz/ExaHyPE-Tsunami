@@ -1,7 +1,7 @@
 #ifndef IODIR_H
 
 #include <string>
-#include <stdlib.h>
+#include <stdio.h>
 
 std::string get_output();
 
