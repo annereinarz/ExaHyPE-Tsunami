@@ -27,7 +27,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-    auto inputs = get_inputs();
+    auto inputs = get_input();
     std::ifstream inputsfile(inputs);
 
 	std::vector<double> param = {0.0,0.0};
@@ -44,7 +44,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
 	if(paramOutside){
-        auto outputs = get_outputs();
+        auto outputs = get_output();
         std::ofstream outputsfile(outputs);
 	
 		typedef std::numeric_limits<double> dl;
