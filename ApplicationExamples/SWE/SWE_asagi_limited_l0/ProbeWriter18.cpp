@@ -39,18 +39,18 @@ void SWE::ProbeWriter18::mapQuantities(
   //std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
   //TODO write out into file						     { 1050.67821,   798.352124}};
     if(Q[3]+Q[0] > solution18[1]){
-	  solution18[0] = timeStamp; 
+	  solution18[0] = timeStamp;
 	  solution18[1] = Q[3]+Q[0];
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
   if(timeStamp>2500.0 && timeStamp<10000 && isWritten==false){
-      auto outputs = get_output();
+    auto outputs = get_output("Probe18");
       std::ofstream outputsfile(outputs);
       typedef std::numeric_limits<double> dl;
 	  outputsfile << std::fixed << std::setprecision(dl::digits10);
 	  outputsfile << solution18[0] << std::endl;
 	  outputsfile << solution18[1] << std::endl;
-	  outputsfile.close();	
+	  outputsfile.close();
 	  isWritten = true;
   }
 

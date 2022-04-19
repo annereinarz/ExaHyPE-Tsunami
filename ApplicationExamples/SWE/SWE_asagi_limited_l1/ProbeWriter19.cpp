@@ -40,16 +40,16 @@ void SWE::ProbeWriter19::mapQuantities(
   //						     { 1050.67821,   798.352124}};
   // TODO write out into file
   if(Q[0]+Q[3] > solution19[1]){
-	  solution19[0] = timeStamp; 
+	  solution19[0] = timeStamp;
 	  solution19[1] = Q[0]+Q[3];
 	  //std::cout <<"Probe" << 0 << " has time " << muq::solution[0+2*0]/60 << " and height " << muq::solution[1+2*0]*1000 << std::endl;
   }
   if(timeStamp>5550.0 && timeStamp<10000 && isWritten19==false){
-      auto outputs = get_output();
+    auto outputs = get_output("Probe19");
 	  std::ofstream outputsfile(outputs);
 	  outputsfile << solution19[0] << std::endl;
 	  outputsfile << solution19[1] << std::endl;
-	  outputsfile.close();	
+	  outputsfile.close();
 	  isWritten19 = true;
   }
 
