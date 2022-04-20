@@ -114,6 +114,7 @@
 			  }
 		  },
 		  {
+			  "type": "probe::ascii",
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
