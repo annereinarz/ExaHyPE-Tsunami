@@ -47,6 +47,8 @@ void SWE::ProbeWriter19::mapQuantities(
   if(timeStamp>5550.0 && timeStamp<10000 && isWritten19==false){
     auto outputs = get_output("Probe19");
 	  std::ofstream outputsfile(outputs);
+      if(!outputsfile.is_open())
+          std::cout << "File could not be opened" << std::endl;
 	  outputsfile << solution19[0] << std::endl;
 	  outputsfile << solution19[1] << std::endl;
 	  outputsfile.close();
