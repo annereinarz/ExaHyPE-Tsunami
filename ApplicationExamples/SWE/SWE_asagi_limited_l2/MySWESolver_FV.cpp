@@ -10,7 +10,6 @@ double grav = 9.81*1.0e-3;
 InitialData* initialData;
 
 void SWE::MySWESolver_FV::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-
         initialData = new InitialData(14,"data_gmt.yaml");
 }
 
@@ -20,8 +19,9 @@ void SWE::MySWESolver_FV::adjustSolution(const double* const x,const double t,co
 	// Dimensions             = 2
 	// Number of variables    = 4 + #parameters
 	if (tarch::la::equals(t,0.0)) {
-		static tarch::multicore::BooleanSemaphore initializationSemaphoreDG;
-		tarch::multicore::Lock lock(initializationSemaphoreDG);
+        std::cout << "Calling initial data from FV" << std::endl;
+		static tarch::multicore::BooleanSemaphore initializationSemaphoreFV;
+		tarch::multicore::Lock lock(initializationSemaphoreFV);
 		initialData->getInitialData(x, Q);
 		lock.free();
 	}
