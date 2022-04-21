@@ -27,7 +27,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile("/tmp/inputs.txt.txt");
+	std::ifstream inputsfile("/tmp/inputs.txt");
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
@@ -36,7 +36,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
 		paramOutside = true;
 	}
-        DG::initialData = new InitialData(14,"data_gmt.yaml");
+    DG::initialData = new InitialData(14,"data_gmt.yaml");
 }
 
 
@@ -50,7 +50,6 @@ void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const do
 		for(int i = 0; i<4; i++) Q[i] = 0.0;
 	}
 	else{
-
 		// Dimensions                        = 2
 		// Number of variables + parameters  = 4 + 0
 		if (tarch::la::equals(t,0.0)) {
@@ -59,34 +58,7 @@ void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const do
 			DG::initialData->getInitialData(x, Q);		
 			lock.free();
 		}
-		/*//probe 1
-		std::vector<std::vector<double>> probe_point = {{ 545.735266126, 62.7164740303 },
-			{ 1050.67821,   798.352124}};
-		if(std::abs(x[0]-probe_point[0][0])<60.0 && std::abs(x[1]-probe_point[0][1])<60.0){
-			if(Q[0]+Q[3] > DG::solution[1+2*0]){
-				DG::solution[0+2*0] = t; 
-				DG::solution[1+2*0] = Q[0]+Q[3];
-			}
-		}
-		//probe 2
-		if(std::abs(x[0]-probe_point[1][0])<60.0 && std::abs(x[1]-probe_point[1][1])<60.0){
-			if(Q[0]+Q[3] > DG::solution[1+2*1]){
-				DG::solution[0+2*1] = t; 
-				DG::solution[1+2*1] = Q[0]+Q[3];
-			}
-		}
-		if(t>5500.0 && isWritten==false){
-			std::ofstream outputsfile("/tmp/outputs.txt");
-			typedef std::numeric_limits<double> dl;
-			outputsfile << std::fixed << std::setprecision(dl::digits10);
-			outputsfile << DG::solution[0] << std::endl;
-			outputsfile << DG::solution[1] << std::endl;
-			outputsfile << DG::solution[2] << std::endl;
-			outputsfile << DG::solution[3] << std::endl;
-			outputsfile.close();	
-			isWritten = true;
-		}*/
-	}
+    }
 }
 
 void SWE::MySWESolver_ADERDG::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {

@@ -27,7 +27,7 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
-	std::ifstream inputsfile("/tmp/inputs.txt.txt");
+	std::ifstream inputsfile("/tmp/inputs.txt");
 	std::vector<double> param = {0.0,0.0};
 	for (int i = 0; i < 2; i++) {
 		inputsfile >> param[i];
