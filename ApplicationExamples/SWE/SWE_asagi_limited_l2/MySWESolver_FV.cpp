@@ -1,4 +1,5 @@
 #include "MySWESolver_FV.h"
+#include "MySWESolver_ADERDG.h"
 #include "MySWESolver_FV_Variables.h"
 
 #include "kernels/KernelUtils.h"
@@ -18,6 +19,7 @@ void SWE::MySWESolver_FV::adjustSolution(const double* const x,const double t,co
 			Q[1] = 0;
 			Q[2] = 0;
 		}
+        DG::initialData->getInitialData(x, Q);
 }
 
 void SWE::MySWESolver_FV::eigenvalues(const double* const Q, const int dIndex, double* const lambda) {

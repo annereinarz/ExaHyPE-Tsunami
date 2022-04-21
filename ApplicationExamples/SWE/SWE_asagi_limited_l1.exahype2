@@ -52,7 +52,7 @@
 	  "order": 2,
 	  "maximum_mesh_size": 80,
 	  "maximum_mesh_depth": 0,
-	  "time_stepping": "global",
+	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
 		  "language": "C",
 		  "nonlinear": true,
