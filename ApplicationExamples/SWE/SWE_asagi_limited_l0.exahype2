@@ -3,7 +3,7 @@
    "paths": {
 	"peano_kernel_path": "Peano",
 	"exahype_path": "ExaHyPE",
-	"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited_l1",
+	"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited_l0",
 	"log_file": "mylogfile.log"
   },
   "architecture": "snb",
@@ -107,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "/Probes/buoy18/80",
+			  "output": "/Probes/buoy18/90",
 			  "variables": 4,
 			  "select": {
 				  "x": 545.735266126,
@@ -119,7 +119,7 @@
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "/Probes/buoy19/80",
+			  "output": "/Probes/buoy19/90",
 			  "variables": 4,
 			  "select": {
 				  "x": 1050.67821,
@@ -131,7 +131,7 @@
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/80/vtk-output-l1-",
+              "output": "/output/90/vtk-output-l0-",
               "variables": 4
           }
 	  ]
