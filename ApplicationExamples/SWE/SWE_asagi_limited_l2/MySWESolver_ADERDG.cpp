@@ -38,7 +38,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
 		paramOutside = true;
 	}
-        DG::initialData = new InitialData(15,"data_gmt.yaml");
+    DG::initialData = new InitialData(14,"data_gmt.yaml");
 }
 
 
