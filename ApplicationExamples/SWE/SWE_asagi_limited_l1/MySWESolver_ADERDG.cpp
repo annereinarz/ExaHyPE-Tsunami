@@ -233,11 +233,13 @@ bool SWE::MySWESolver_ADERDG::isPhysicallyAdmissible(
 		return true;
 
 	// Limit at domain boundary
+    if(t>0.0){
 	if( std::abs(center[0]+499)<dx[0]
 			|| std::abs(center[0]-1798+499)<dx[0]
 			|| std::abs(center[1]+949)<dx[1]
 			|| std::abs(center[1]-1798+949)<dx[1])
 		return false;
+    }
 	return true;
 }
 
