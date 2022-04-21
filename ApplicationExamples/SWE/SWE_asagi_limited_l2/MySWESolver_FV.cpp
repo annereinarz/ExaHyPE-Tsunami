@@ -1,5 +1,4 @@
 #include "MySWESolver_FV.h"
-#include "MySWESolver_ADERDG.h"
 #include "MySWESolver_FV_Variables.h"
 
 #include "kernels/KernelUtils.h"
@@ -8,8 +7,10 @@ using namespace kernels;
 
 double epsilon = 1.0e-2;
 double grav = 9.81*1.0e-3;
+InitialData* initialData;
 
 void SWE::MySWESolver_FV::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
+    initialData = new InitialData(14,"data_gmt.yaml");
 }
 
 void SWE::MySWESolver_FV::adjustSolution(const double* const x,const double t,const double dt, double* const Q) {
