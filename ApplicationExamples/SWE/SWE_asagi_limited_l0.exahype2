@@ -3,7 +3,7 @@
    "paths": {
 	"peano_kernel_path": "Peano",
 	"exahype_path": "ExaHyPE",
-	"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited_l0",
+	"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited_l1",
 	"log_file": "mylogfile.log"
   },
   "architecture": "snb",
@@ -11,12 +11,12 @@
     "dimension": 2,
     "end_time": 5600.0,
     "offset": [
-      -115.0,
-      -565.0
+      -499.0,
+      -949.0
     ],
     "width": [
-      1000.0,
-      1000.0
+      1798.0,
+      1798.0
     ]
   },
   "shared_memory": {
@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 70,
+	  "maximum_mesh_size": 22,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -58,7 +58,7 @@
 		  "nonlinear": true,
 		  "terms": [
 			  "flux",
-              "ncp"
+		           "ncp"
 			  ],
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
@@ -73,6 +73,7 @@
 		  "dmp_difference_scaling": 100000000.0,
 		  "implementation": "generic"
 	  },
+
 	  "fv_kernel": {
 		  "language": "C",
 		  "terms": [
@@ -87,7 +88,7 @@
 		  "name": "h",
 		  "multiplicity": 1
 	  },
-	 { 
+	  {
 		  "name": "hu",
 		  "multiplicity": 1
 	  },
@@ -106,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "/Probes/buoy18/90",
+			  "output": "/Probes/buoy18/80",
 			  "variables": 4,
 			  "select": {
 				  "x": 545.735266126,
@@ -118,7 +119,7 @@
 			  "name": "ProbeWriter19",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "/Probes/buoy19/90",
+			  "output": "/Probes/buoy19/80",
 			  "variables": 4,
 			  "select": {
 				  "x": 1050.67821,
@@ -130,10 +131,10 @@
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/90/vtk-output-l0-",
+              "output": "/output/80/vtk-output-l1-",
               "variables": 4
           }
-      ]
+	  ]
   } 
-   ]
+ ]
 }
