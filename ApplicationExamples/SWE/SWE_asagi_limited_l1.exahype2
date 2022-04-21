@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 70,
+	  "maximum_mesh_size": 80,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -63,7 +63,7 @@
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
 		  "optimised_kernel_debugging": [],
-		  "implementation": "optimised",
+		  "implementation": "generic",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
