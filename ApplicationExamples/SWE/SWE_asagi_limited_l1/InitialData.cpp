@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include <stdlib.h>
+#include "iodir.h"
 
 using namespace std;
 ///// 2D /////
@@ -21,8 +22,9 @@ InitialData::InitialData()
 	: scenario(){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
-		for (int i = 0; i < 2; i++) {
+        auto inputs = get_input();
+        std::ifstream inputsfile(inputs);
+        for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
 		inputsfile.close();
@@ -37,8 +39,9 @@ InitialData::InitialData(int a_scenario, char* filename)
 	: scenario(a_scenario){
 		std::cout << "Initialising with ASAGI" << std::endl;
 
-		std::ifstream inputsfile("/tmp/inputs.txt");
-		for (int i = 0; i < 2; i++) {
+        auto inputs = get_input();
+        std::ifstream inputsfile(inputs);
+        for (int i = 0; i < 2; i++) {
 			inputsfile >> param[i];
 		}
 		inputsfile.close();

@@ -67,13 +67,12 @@
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
-	  "limiter": {
-		  "dmp_observables": 1,
-		  "dmp_relaxation_parameter": 100000000.0,
-		  "dmp_difference_scaling": 100000000.0,
-		  "implementation": "generic"
-	  },
-
+      "limiter": {
+				"dmp_observables": 4,
+				"dmp_relaxation_parameter": 10000.0,
+				"dmp_difference_scaling": 10000.0,
+				"implementation": "generic"
+      },
 	  "fv_kernel": {
 		  "language": "C",
 		  "terms": [
@@ -101,7 +100,7 @@
 		  "multiplicity": 1
 	  }
 	  ],
-		  "plotters": [
+      "plotters": [
 		  {
 			  "type": "probe::ascii",
 			  "name": "ProbeWriter18",
@@ -127,15 +126,15 @@
 			  }
 		  },
           {
-              "type": "vtk::Cartesian::vertices::ascii",
+              "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/65/vtk-output-l2-",
+              "output": "/output/65/vtk-output-l2",
               "variables": 4
           }
 
       ]
-  } 
+  }
  ]
 }

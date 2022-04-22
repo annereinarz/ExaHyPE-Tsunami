@@ -50,27 +50,27 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 22,
+	  "maximum_mesh_size": 80,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
 		  "language": "C",
 		  "nonlinear": true,
 		  "terms": [
-			  "flux",
-		           "ncp"
+              "flux",
+              "ncp"
 			  ],
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
 		  "optimised_kernel_debugging": [],
-		  "implementation": "optimised",
+		  "implementation": "generic",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
 	  "limiter": {
-		  "dmp_observables": 1,
-		  "dmp_relaxation_parameter": 100000000.0,
-		  "dmp_difference_scaling": 100000000.0,
+		  "dmp_observables": 4,
+		  "dmp_relaxation_parameter": 10000.0,
+		  "dmp_difference_scaling": 10000.0,
 		  "implementation": "generic"
 	  },
 
@@ -127,11 +127,11 @@
 			  }
 		  },
           {
-              "type": "vtk::Cartesian::vertices::ascii",
+              "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/80/vtk-output-l1-",
+              "output": "/output/80/vtk-output-l1",
               "variables": 4
           }
 	  ]
