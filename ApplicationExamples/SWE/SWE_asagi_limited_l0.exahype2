@@ -127,7 +127,7 @@
 			  }
 		  },
           {
-              "type": "vtk::Cartesian::vertices::ascii",
+              "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "Writer",
               "time": 0.0,
               "repeat": 100.0,
