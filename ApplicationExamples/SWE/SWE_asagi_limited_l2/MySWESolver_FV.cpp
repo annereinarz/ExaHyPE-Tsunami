@@ -13,23 +13,14 @@ void SWE::MySWESolver_FV::init(const std::vector<std::string>& cmdlineargs,const
         initialData = new InitialData(14,"data.yaml");
 }
 
-
-
 void SWE::MySWESolver_FV::adjustSolution(const double* const x,const double t,const double dt, double* const Q) {
 	// Dimensions             = 2
 	// Number of variables    = 4 + #parameters
-	if (tarch::la::equals(t,0.0)) {
-		static tarch::multicore::BooleanSemaphore initializationSemaphoreDG;
-		tarch::multicore::Lock lock(initializationSemaphoreDG);
-		initialData->getInitialData(x, Q);
-		lock.free();
-	}
-	else{
 		if(Q[0] < epsilon){
 			Q[1] = 0;
-			Q[2] = 0;      
+			Q[2] = 0;
 		}
-	}
+        initialData->getInitialData(x, Q);
 }
 
 void SWE::MySWESolver_FV::eigenvalues(const double* const Q, const int dIndex, double* const lambda) {
