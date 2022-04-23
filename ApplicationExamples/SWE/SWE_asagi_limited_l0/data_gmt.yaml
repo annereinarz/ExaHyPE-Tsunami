@@ -9,7 +9,7 @@ components:
   !Switch
   [b]: 
     !ASAGI
-    file: tohoku_2011/tohoku_2011_bath_smooth_Fg100000.nc
+    file: tohoku_2011/tohoku_gebco_ucsb3_2000m_hawaii_bath.nc
     interpolation: linear
     parameters: [b]
     var: z
