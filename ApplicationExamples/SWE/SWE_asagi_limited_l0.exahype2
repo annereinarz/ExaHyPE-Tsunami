@@ -28,7 +28,7 @@
   "distributed_memory": {
     "timeout": 10000,
     "load_balancing_type": "static",
-    "buffer_size": 1600,
+    "buffer_size": 160000,
     "load_balancing_strategy": "hotspot",
     "node_pool_strategy": "fair",
     "ranks_per_node": 1
@@ -50,29 +50,30 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 120,
+	  "maximum_mesh_size": 80,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
 		  "language": "C",
 		  "nonlinear": true,
 		  "terms": [
-			  "flux",
-		           "ncp"
+              "flux",
+              "ncp"
 			  ],
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
 		  "optimised_kernel_debugging": [],
-		  "implementation": "optimised",
+		  "implementation": "generic",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
 	  "limiter": {
-		  "dmp_observables": 0,
+		  "dmp_observables": 4,
 		  "dmp_relaxation_parameter": 10000.0,
 		  "dmp_difference_scaling": 10000.0,
 		  "implementation": "generic"
 	  },
+
 	  "fv_kernel": {
 		  "language": "C",
 		  "terms": [
@@ -87,7 +88,7 @@
 		  "name": "h",
 		  "multiplicity": 1
 	  },
-	 { 
+	  {
 		  "name": "hu",
 		  "multiplicity": 1
 	  },
@@ -106,7 +107,7 @@
 			  "name": "ProbeWriter18",
 			  "time": 0.0,
 			  "repeat": 10.0,
-			  "output": "./Probes/buoy18",
+			  "output": "/Probes/buoy18/90",
 			  "variables": 0,
 			  "select": {
 				  "x": 545.735266126,
@@ -115,25 +116,25 @@
 		  },
 		  {
 			  "type": "probe::ascii",
-              "name": "ProbeWriter19",
-              "time": 0.0,
-              "repeat": 10.0,
-              "output": "./Probes/buoy19",
-              "variables": 0,
-              "select": {
-                  "x": 1050.67821,
-                  "y": 798.352124
-              }
-          },
+			  "name": "ProbeWriter19",
+			  "time": 0.0,
+			  "repeat": 10.0,
+			  "output": "/Probes/buoy19/90",
+			  "variables": 0,
+			  "select": {
+				  "x": 1050.67821,
+				  "y": 798.352124
+			  }
+		  },
           {
-              "type": "vtk::Cartesian::vertices::ascii",
+              "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "Writer",
-              "time": 10000.0,
+              "time": 0.0,
               "repeat": 100.0,
-              "output": "/output/vtk-output-l0-",
+              "output": "/output/90/vtk-output",
               "variables": 4
           }
-      ]
+	  ]
   } 
-   ]
+ ]
 }
