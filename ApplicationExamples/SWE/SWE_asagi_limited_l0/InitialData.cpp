@@ -81,6 +81,7 @@ void InitialData::readAsagiData_nobath(const double* const x,double* Q){
 }
 
 void InitialData::readAsagiData(const double* const x,double* Q){
+/*
 	double bathymetry[1], displacement[1];
 	bathymetry[0] = 0.0; displacement[0] = 0.0;
 
@@ -92,9 +93,7 @@ void InitialData::readAsagiData(const double* const x,double* Q){
 	query.x(0,1)=x[1];
 	query.x(0,2)=0;
 	model->evaluate(query,adapter);
-	
-	Q[3]= bathymetry[0];
-	
+*/
 	easi::ArraysAdapter<double> adapter2;
 	adapter2.addBindingPoint("d",displacement);
 
@@ -109,7 +108,7 @@ void InitialData::readAsagiData(const double* const x,double* Q){
 		std::cout << "Error when reading bathymetry" << x[0] << "," << x[1] << std::endl;
 	Q[1]= 0;
 	Q[2]= 0;
-	Q[3]+= displacement[0];
+	Q[3]= displacement[0]+bathymetry[0]; 
 }
 
 void InitialData::getInitialData(const double* const x,double* Q) {
