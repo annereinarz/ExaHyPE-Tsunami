@@ -82,7 +82,7 @@ void InitialData::readAsagiData_nobath(const double* const x,double* Q){
 
 void InitialData::readAsagiData(const double* const x,double* Q){
 	double bathymetry[1], displacement[1];
-	bathymetry[0] = 0.0; displacement[0] = 0.0;
+	//bathymetry[0] = 0.0; displacement[0] = 0.0;
 
 	easi::ArraysAdapter<double> adapter;
 	adapter.addBindingPoint("b",bathymetry);
