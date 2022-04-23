@@ -65,6 +65,7 @@ void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const do
 		for(int i = 0; i<4; i++) Q[i] = 0.0;
 	}
 	else{
+
 		// Dimensions                        = 2
 		// Number of variables + parameters  = 4 + 0
 		if (tarch::la::equals(t,0.0)) {
@@ -73,11 +74,7 @@ void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const do
 			DG::initialData->getInitialData(x, Q);
 			lock.free();
 		}
-<<<<<<< HEAD
-    }
-=======
 	}
->>>>>>> main
 }
 
 void SWE::MySWESolver_ADERDG::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {
