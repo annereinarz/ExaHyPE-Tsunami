@@ -45,15 +45,13 @@ void SWE::ProbeWriter18::mapQuantities(
   }
   if(timeStamp>2500.0 && timeStamp<10000 && isWritten==false){
     auto outputs = get_output("Probe18");
-    std::ofstream outputsfile(outputs);
-    if(!outputsfile.is_open())
-        std::cout << "File could not be opened" << std::endl;
-    typedef std::numeric_limits<double> dl;
-    outputsfile << std::fixed << std::setprecision(dl::digits10);
-    outputsfile << solution18[0] << std::endl;
-    outputsfile << solution18[1] << std::endl;
-    outputsfile.close();
-    isWritten = true;
+      std::ofstream outputsfile(outputs);
+      typedef std::numeric_limits<double> dl;
+	  outputsfile << std::fixed << std::setprecision(dl::digits10);
+	  outputsfile << solution18[0] << std::endl;
+	  outputsfile << solution18[1] << std::endl;
+	  outputsfile.close();
+	  isWritten = true;
   }
 
 }

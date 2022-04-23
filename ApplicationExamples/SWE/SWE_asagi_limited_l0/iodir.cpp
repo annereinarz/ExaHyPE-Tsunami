@@ -17,6 +17,5 @@ std::string get_output(std::string probe_name){
         std::cout << "Shared directory path not set" <<std::endl;
     }
     std::string output(env_path);
-    std::cout << "Shared directory path " << output+probe_name+"outputs.txt"  <<std::endl;
     return output+probe_name+"outputs.txt";
 }

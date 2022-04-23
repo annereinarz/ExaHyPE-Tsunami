@@ -38,7 +38,7 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
 		paramOutside = true;
 	}
-	DG::initialData = new InitialData(14,"data.yaml");
+	DG::initialData = new InitialData(14,"data_gmt.yaml");
 }
 
 
@@ -205,14 +205,12 @@ bool SWE::MySWESolver_ADERDG::isPhysicallyAdmissible(
 	if(paramOutside)
 		return true;
 
-	if(observablesMin[3] > -DG::epsilon)
-		return false;
-	if(observablesMin[0] > -DG::epsilon*10)
+	if(observablesMin[0]> -DG::epsilon*10)
 		return false;
 
 	// Limit at domain boundary
     if(t>0.0){
-	   if( std::abs(center[0]+499)<dx[0]
+	if( std::abs(center[0]+499)<dx[0]
 			|| std::abs(center[0]-1798+499)<dx[0]
 			|| std::abs(center[1]+949)<dx[1]
 			|| std::abs(center[1]-1798+949)<dx[1])
