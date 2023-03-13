@@ -72,7 +72,7 @@
 		  "dmp_observables": 0,
 		  "dmp_relaxation_parameter": 10000.0,
 		  "dmp_difference_scaling": 10000.0,
-		  "implementation": "optimised"
+		  "implementation": "generic"
 	  },
 	  "fv_kernel": {
 		  "language": "C",

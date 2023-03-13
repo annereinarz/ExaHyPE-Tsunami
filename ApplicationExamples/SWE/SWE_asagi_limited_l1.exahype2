@@ -81,7 +81,7 @@
 			  "flux"
 			  ],
 		  "scheme": "godunov",
-		  "implementation": "optimised",
+		  "implementation": "generic",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "variables": [
