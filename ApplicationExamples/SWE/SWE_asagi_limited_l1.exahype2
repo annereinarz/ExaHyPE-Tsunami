@@ -22,6 +22,9 @@
   "shared_memory": {
     "cores": 20,
     "properties_file": "sharedmemory.properties",
+    "high_priority_background_job_processing": "one_at_a_time",
+    "low_priority_background_job_processing": "run_if_no_high_priority_job_left",
+    "thread_stack_size": 16777216,
     "autotuning_strategy": "dummy",
     "background_job_consumers": 11
   },
@@ -34,13 +37,13 @@
     "ranks_per_node": 1
   },
   "optimisation": {
-    "fuse_algorithmic_steps": "none",
+    "fuse_algorithmic_steps": "all",
     "fuse_algorithmic_steps_rerun_factor": 0.99,
     "fuse_algorithmic_steps_diffusion_factor": 0.99,
-    "spawn_predictor_as_background_thread": false,
+    "spawn_predictor_as_background_thread": true,
     "spawn_amr_background_threads": false,
     "disable_vertex_exchange_in_time_steps": true,
-    "time_step_batch_factor": 0.0,
+    "time_step_batch_factor": 1.0,
     "disable_metadata_exchange_in_batched_time_steps": true,
     "double_compression": 0.0,
     "spawn_double_compression_as_background_thread": false
@@ -50,7 +53,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 80,
+	  "maximum_mesh_size": 40,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -63,7 +66,7 @@
 		  "space_time_predictor": {},
 		  "optimised_terms": [],
 		  "optimised_kernel_debugging": [],
-		  "implementation": "generic",
+		  "implementation": "optimised",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "point_sources": 0,
@@ -80,7 +83,7 @@
 			  "flux"
 			  ],
 		  "scheme": "godunov",
-		  "implementation": "generic",
+		  "implementation": "optimised",
 		  "allocate_temporary_arrays": "stack"
 	  },
 	  "variables": [
