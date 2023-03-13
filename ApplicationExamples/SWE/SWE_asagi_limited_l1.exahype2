@@ -22,8 +22,6 @@
   "shared_memory": {
     "cores": 20,
     "properties_file": "sharedmemory.properties",
-    "high_priority_background_job_processing": "one_at_a_time",
-    "low_priority_background_job_processing": "run_if_no_high_priority_job_left",
     "thread_stack_size": 16777216,
     "autotuning_strategy": "dummy",
     "background_job_consumers": 11
