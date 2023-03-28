@@ -6,7 +6,7 @@
 			"output_directory": "ApplicationExamples/SWE/SWE_asagi_limited_l2",
 			"log_file": "mylogfile.log"
 		},
-		"architecture": "snb",
+		"architecture": "skx",
 		"computational_domain": {
 			"dimension": 2,
 			"end_time": 5600.0,
@@ -27,9 +27,9 @@
 			"background_job_consumers": 11
 		},
 		"distributed_memory": {
-			"timeout": 10000,
+			"timeout": 10,
 			"load_balancing_type": "static",
-			"buffer_size": 1600,
+			"buffer_size": 1000600,
 			"load_balancing_strategy": "hotspot",
 			"node_pool_strategy": "fair",
 			"ranks_per_node": 1
