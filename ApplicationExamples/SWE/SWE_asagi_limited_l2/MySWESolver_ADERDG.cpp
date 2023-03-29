@@ -123,9 +123,10 @@ void SWE::MySWESolver_ADERDG::eigenvalues(const double* const Q,const int d,doub
 		ReadOnlyVariables vars(Q);
 		Variables eigs(lambda);
 
-		const double c = std::sqrt(DG::grav*vars.h());
+        const double factor = 1.5;
+		const double c = std::sqrt(DG::grav*vars.h()) / factor;
 		const double ih = 1./vars.h();
-		double u_n = Q[d + 1] * ih;
+		double u_n = Q[d + 1] * ih / factor;
 
 		if(Q[0]<DG::epsilon){
 			eigs.h() = DG::epsilon;

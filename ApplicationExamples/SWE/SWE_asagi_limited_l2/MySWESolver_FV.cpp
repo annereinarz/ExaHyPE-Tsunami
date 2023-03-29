@@ -34,13 +34,13 @@ void SWE::MySWESolver_FV::eigenvalues(const double* const Q, const int dIndex, d
   const double c = std::sqrt(grav * vars.h());
   double u_n = Q[dIndex + 1] * vars.h() * std::sqrt(2)/std::sqrt(std::pow(vars.h(), 4) + std::pow(std::max(vars.h(), epsilon), 4));
 
-  eigs.h() = u_n + c;
-  eigs.hu() = u_n - c;
-  eigs.hv() = u_n;
+  eigs.h() = (u_n + c) / 1.5;
+  eigs.hu() = (u_n - c) / 1.5;
+  eigs.hv() = u_n / 1.5;
   eigs.b() = 0.0;
 
   if(tarch::la::equals(u_n,0.0) && tarch::la::equals(c,0.0)){
-    eigs.h() = std::sqrt(grav * epsilon);
+    eigs.h() = std::sqrt(grav * epsilon) / 1.5;
   }
 
 }
