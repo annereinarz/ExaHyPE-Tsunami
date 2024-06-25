@@ -14,7 +14,7 @@
 #ifndef _EXAHYPE_{{guardNamespace}}_KERNELS_H_
 #define _EXAHYPE_{{guardNamespace}}_KERNELS_H_
 
-#ifndef __INTEL_COMPILER
+#if !defined(__INTEL_COMPILER) && !defined(__aarch64__)
 #include <mm_malloc.h>
 #endif
 #include <vector>
