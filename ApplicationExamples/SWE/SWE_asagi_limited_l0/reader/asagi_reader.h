@@ -3,6 +3,7 @@
 
 #include <asagi.h>
 #include <easi/util/AsagiReader.h>
+#include <iostream>
 
 #ifdef USE_ASAGI
 

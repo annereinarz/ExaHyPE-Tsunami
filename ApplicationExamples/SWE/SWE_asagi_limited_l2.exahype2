@@ -131,7 +131,7 @@
 				"name": "Writer",
 				"time": 10000.0,
 				"repeat": 100.0,
-				"output": "/output/vtk-output-l2",
+				"output": "./output/vtk-output-l2",
 				"variables": 4
 			}
 			]
