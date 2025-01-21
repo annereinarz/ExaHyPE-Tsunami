@@ -1,0 +1,23 @@
+!AffineMap
+matrix:
+ x: [1000.0, 0.0, 0.0]
+ y: [0.0, 1000.0, 0.0]
+translation:
+ x: 0.0
+ y: 0.0
+components:
+  !Switch
+  [b]: 
+    !ASAGI
+  file: sandbox_input/rs-save-to-disk-output-20241213104942-Depth.nc
+    interpolation: linear
+    parameters: [b]
+    var: z
+    components:
+      !AffineMap
+      matrix:
+        b: [0.001]
+      translation:
+        b: 0.0
+
+
