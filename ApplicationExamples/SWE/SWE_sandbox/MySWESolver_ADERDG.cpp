@@ -30,42 +30,11 @@ void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,c
 	auto inputs = get_input();
 	std::ifstream inputsfile(inputs);
 
-	std::vector<double> param = {0.0,0.0};
-	for (int i = 0; i < 2; i++) {
-		inputsfile >> param[i];
-	}
-	inputsfile.close();
-	if (param[0] > 739.0 || param[0] < -239.0 || param[1]>339.0 || param[1]<-339.0){ //reject parameters outside domain
-		paramOutside = true;
-	}
-	DG::initialData = new InitialData(14,"data_gmt.yaml");
+	DG::initialData = new InitialData(14,"data.yaml");
 }
 
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
-	if(paramOutside){
-
-		typedef std::numeric_limits<double> dl;
-
-		{
-			auto outputs = get_output("Probe18");
-			std::ofstream outputsfile(outputs);
-			outputsfile << std::fixed << std::setprecision(dl::digits10);
-			for(int i = 0; i<2; i++) outputsfile << 1234.0 << std::endl;
-			outputsfile.close();
-		}
-		{
-			auto outputs = get_output("Probe19");
-			std::ofstream outputsfile(outputs);
-			outputsfile << std::fixed << std::setprecision(dl::digits10);
-			for(int i = 0; i<2; i++) outputsfile << 1234.0 << std::endl;
-			outputsfile.close();
-		}
-
-		for(int i = 0; i<4; i++) Q[i] = 0.0;
-	}
-	else{
-
 		// Dimensions                        = 2
 		// Number of variables + parameters  = 4 + 0
 		if (tarch::la::equals(t,0.0)) {
@@ -74,7 +43,6 @@ void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const do
 			DG::initialData->getInitialData(x, Q);
 			lock.free();
 		}
-	}
 }
 
 void SWE::MySWESolver_ADERDG::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {
