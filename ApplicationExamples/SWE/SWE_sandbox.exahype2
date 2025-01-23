@@ -107,7 +107,7 @@
               "name": "Writer",
               "time": 0.0,
               "repeat": 1.0,
-              "output": "../../../output/vtk-sandbox",
+              "output": "./output/vtk-sandbox",
               "variables": 4
           }
 	  ]
