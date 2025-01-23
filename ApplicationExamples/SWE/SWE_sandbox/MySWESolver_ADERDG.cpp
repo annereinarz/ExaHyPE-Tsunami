@@ -27,10 +27,22 @@ namespace DG{
 }
 
 void SWE::MySWESolver_ADERDG::init(const std::vector<std::string>& cmdlineargs,const exahype::parser::ParserView& constants) {
+	auto inputs = get_input();
+	std::ifstream inputsfile(inputs);
+
+	DG::initialData = new InitialData(14,"data.yaml");
 }
 
 
 void SWE::MySWESolver_ADERDG::adjustPointSolution(const double* const x,const double t,const double dt,double* const Q) {
+		// Dimensions                        = 2
+		// Number of variables + parameters  = 4 + 0
+		if (tarch::la::equals(t,0.0)) {
+			static tarch::multicore::BooleanSemaphore initializationSemaphoreDG;
+			tarch::multicore::Lock lock(initializationSemaphoreDG);
+			DG::initialData->getInitialData(x, Q);
+			lock.free();
+		}
 }
 
 void SWE::MySWESolver_ADERDG::boundaryValues(const double* const x,const double t,const double dt,const int faceIndex,const int normalNonZero,const double* const fluxIn,const double* const stateIn,const double* const gradStateIn,double* const fluxOut,double* const stateOut) {

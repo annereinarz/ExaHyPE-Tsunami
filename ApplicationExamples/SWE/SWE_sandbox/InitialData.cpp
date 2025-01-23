@@ -76,7 +76,7 @@ void InitialData::readAsagiData(const double* const x,double* Q){
 		std::cout << "Error when reading bathymetry" << x[0] << "," << x[1] << std::endl;
 	Q[1]= 0;
 	Q[2]= 0;
-	Q[3]= 100; //TODO 
+	Q[3]= 100 + bathymetry[0]; //TODO 
 }
 
 void InitialData::getInitialData(const double* const x,double* Q) {

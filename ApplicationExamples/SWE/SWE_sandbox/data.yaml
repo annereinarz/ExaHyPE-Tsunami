@@ -1,7 +1,8 @@
 !AffineMap
 matrix:
- x: [800.0, 0.0, 0.0]
- y: [0.0, 600.0, 0.0]
+ x: [799.0, 0.0, 0.0]
+ y: [0.0, 599.0, 0.0]
+>>>>>>> main
 translation:
  x: 0.0
  y: 0.0
@@ -9,10 +10,10 @@ components:
   !Switch
   [b]: 
     !ASAGI
-  file: sandbox_input/rs-save-to-disk-output-20241213104942-Depth.nc
+    file: sandbox_input/rs-save-to-disk-output-20241213104942-Depth.nc
     interpolation: linear
     parameters: [b]
-    var: z
+    var: elevation
     components:
       !AffineMap
       matrix:
