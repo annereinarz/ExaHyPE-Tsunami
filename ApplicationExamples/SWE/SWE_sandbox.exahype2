@@ -9,14 +9,14 @@
   "architecture": "noarch",
   "computational_domain": {
     "dimension": 2,
-    "end_time": 5600.0,
+    "end_time": 56.0,
     "offset": [
-      -499.0,
-      -949.0
+      0.0,
+      0.0
     ],
     "width": [
-      1798.0,
-      1798.0
+      799.0,
+      599.0
     ]
   },
   "shared_memory": {
@@ -106,7 +106,7 @@
               "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "Writer",
               "time": 0.0,
-              "repeat": 100.0,
+              "repeat": 1.0,
               "output": "./output/vtk-sandbox",
               "variables": 4
           }
