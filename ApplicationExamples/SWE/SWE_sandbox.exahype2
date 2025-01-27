@@ -104,7 +104,7 @@
 	  "plotters": [
           {
               "type": "vtk::Cartesian::cells::limited::ascii",
-              "name": "Writer",
+              "name": "ConservedWriter",
               "time": 0.0,
               "repeat": 1.0,
               "output": "./output/vtk-sandbox",
