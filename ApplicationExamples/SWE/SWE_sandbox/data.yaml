@@ -16,7 +16,7 @@ components:
     components:
       !AffineMap
       matrix:
-        b: [0.001]
+        b: [0.01]
       translation:
         b: 0.0
 

@@ -9,7 +9,7 @@
   "architecture": "noarch",
   "computational_domain": {
     "dimension": 2,
-    "end_time": 56.0,
+    "end_time": 1000.0,
     "offset": [
       0.0,
       0.0
@@ -50,7 +50,7 @@
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
 	  "order": 2,
-	  "maximum_mesh_size": 80,
+	  "maximum_mesh_size": 50,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -108,7 +108,7 @@
               "time": 0.0,
               "repeat": 1.0,
               "output": "./output/vtk-sandbox",
-              "variables": 4
+              "variables": 5
           }
 	  ]
   } 

@@ -38,9 +38,5 @@ void SWE::ConservedWriter::mapQuantities(
 		if(std::isfinite(Q[i]) && !std::isnan(Q[i]))
 			outputQuantities[i] = Q[i];
 	}
-	outputQuantities[4] = 0.0;
-	if(Q[3] < 0.0){
-		if(std::isfinite(Q[0]+Q[3]) && !std::isnan(Q[0]+Q[3]))
-			outputQuantities[4] = Q[0] + Q[3];
-	}
+	outputQuantities[4] = Q[0] + Q[3];
 }
