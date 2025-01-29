@@ -49,8 +49,8 @@
   {
 	  "type": "Limiting-ADER-DG",
 	  "name": "MySWESolver",
-	  "order": 2,
-	  "maximum_mesh_size": 50,
+	  "order": 8,
+	  "maximum_mesh_size": 120,
 	  "maximum_mesh_depth": 0,
 	  "time_stepping": "globalfixed",
 	  "aderdg_kernel": {
@@ -106,7 +106,7 @@
               "type": "vtk::Cartesian::cells::limited::ascii",
               "name": "ConservedWriter",
               "time": 0.0,
-              "repeat": 1.0,
+              "repeat": 10.0,
               "output": "./output/vtk-sandbox",
               "variables": 5
           }

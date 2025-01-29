@@ -146,10 +146,7 @@ bool SWE::MySWESolver_ADERDG::isPhysicallyAdmissible(
 		const tarch::la::Vector<DIMENSIONS,double>& dx,
 		const double t) const {
 
-	if(observablesMin[0]> -DG::epsilon)
-		return false;
-
-	return true;
+	return false;
 }
 
 

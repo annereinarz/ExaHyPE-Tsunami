@@ -74,12 +74,12 @@ void InitialData::readAsagiData(const double* const x,double* Q){
 	double sigma =  30.0; // width of initial wave
         double x_center = 400;
         double y_center = 300;
-        Q[0]= 0.01 * exp(-((x[0] - x_center)*(x[0] - x_center) + (x[1] - y_center)*(x[1] - y_center)) / (2 * sigma*sigma)) - bathymetry[0];
+        Q[0]= 0.01 * exp(-((x[0] - x_center)*(x[0] - x_center) + (x[1] - y_center)*(x[1] - y_center)) / (2 * sigma*sigma)) + bathymetry[0];
         if(std::isnan(Q[0]))
                 std::cout << "Error when reading bathymetry" << x[0] << "," << x[1] << std::endl;
         Q[1]= 0;
         Q[2]= 0;
-        Q[3]= bathymetry[0];
+        Q[3]= -bathymetry[0];
 }
 
 void InitialData::getInitialData(const double* const x,double* Q) {
